@@ -1,0 +1,23 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "4034145",
+      "name": "主页-设置",
+      "font_class": "shezhi",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "10408941",
+      "name": "冰箱",
+      "font_class": "bingxiang-xian",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    }
+  ]
+}

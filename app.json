@@ -1,0 +1,17 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/logs/logs"
+    ],
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "冰箱笔记",
+        "navigationBarTextStyle": "black"
+    },
+    "usingComponents": {
+        "van-tabbar": "@vant/weapp/tabbar",
+        "van-tabbar-item": "@vant/weapp/tabbar-item"
+    },
+    "sitemapLocation": "sitemap.json"
+}

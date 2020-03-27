@@ -1,0 +1,52 @@
+<!--index.wxml-->
+<view wx:if="{{active==0}}" class="page">
+    <view class="title">{{refigerateorName}}</view>
+    <!-- <van-row>
+  <van-col >
+  <van-collapse value="{{ activeNames }}" bind:change="collapseChange">
+  <van-collapse-item span="8" title="有赞微商城" name="1">
+    提供多样店铺模板，快速搭建网上商城
+  </van-collapse-item>
+  <van-collapse-item  name="2">
+  <button>222</button>
+    网店吸粉获客、会员分层营销、一机多种收款，告别经营低效和客户流失
+  </van-collapse-item>
+  <van-collapse-item title="有赞美业" name="3" disabled>
+    线上拓客，随时预约，贴心顺手的开单收银
+  </van-collapse-item>
+</van-collapse>
+</van-col>
+  <van-col span="8">span: 8</van-col>
+  <van-col span="8">span: 8</van-col>
+</van-row> -->
+    <van-panel title="冷藏" desc="0C~3C" status="状态" use-footer-slot>
+        <van-row gutter="10">
+            <van-col span="5" offset="2">
+                <van-button custom-class="tpm" square type="primary">苹果x3</van-button>
+            </van-col>
+            <van-col span="5">
+                <van-button custom-class="tpm" square type="primary">苹果x3</van-button>
+            </van-col>
+            <van-col span="5">
+                <van-button custom-class="tpm" square type="primary">苹果x3</van-button>
+            </van-col>
+            <van-col span="5">
+                <van-button custom-class="tpm" square type="primary">苹果x3</van-button>
+            </van-col>
+            <van-col offset="2" span="5">
+                <van-button custom-class="tpm" square type="danger">苹果x3</van-button>
+            </van-col>
+        </van-row>
+        <view slot="footer">
+            <van-button size="small">按钮</van-button>
+            <van-button size="small" type="danger">按钮</van-button>
+        </view>
+    </van-panel>
+</view>
+<view wx:eles>
+
+</view>
+<van-tabbar active="{{ active }}" safe-area-inset-bottom="true" bind:change="tabbarChange">
+    <van-tabbar-item icon="home-o">冰箱</van-tabbar-item>
+    <van-tabbar-item icon="apps-o">菜单</van-tabbar-item>
+</van-tabbar>
