@@ -1,7 +1,7 @@
 {
     "pages": [
-        "pages/index/index",
-        "pages/logs/logs"
+        "pages/fridgeInfo/fridgeInfo",
+        "pages/personal/personal"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -9,9 +9,26 @@
         "navigationBarTitleText": "冰箱笔记",
         "navigationBarTextStyle": "black"
     },
+    "tabBar": {
+        "custom": true,
+        "color": "#000000",
+        "selectedColor": "#000000",
+        "backgroundColor": "#000000",
+        "list": [
+            {
+                "pagePath": "pages/fridgeInfo/fridgeInfo",
+                "text": "冰箱"
+            },
+            {
+                "pagePath": "pages/personal/personal",
+                "text": "个人"
+            }
+        ]
+    },
     "usingComponents": {
         "van-tabbar": "@vant/weapp/tabbar",
-        "van-tabbar-item": "@vant/weapp/tabbar-item"
+        "van-tabbar-item": "@vant/weapp/tabbar-item",
+        "van-nav-bar": "@vant/weapp/nav-bar/index"
     },
     "sitemapLocation": "sitemap.json"
 }
