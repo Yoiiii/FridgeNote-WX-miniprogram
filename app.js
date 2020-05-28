@@ -4,14 +4,12 @@ App({
     onLaunch: async function() {
         // 展示本地存储能力
         var logs = wx.getStorageSync('logs') || []
-        const res = await api.test()
-        console.log(res)
         logs.unshift(Date.now())
         wx.setStorageSync('logs', logs)
         // 登录
         wx.login({
-            async success: res => {
-                await http.wxlogin(res.code)
+             success:async res => {
+                await http.login({code:res.code})
                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
             }
         })
