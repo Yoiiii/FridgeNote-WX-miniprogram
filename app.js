@@ -1,5 +1,5 @@
 //app.js
-import api from "./utils/api.js"
+import http from "./utils/api.js"
 App({
     onLaunch: async function() {
         // 展示本地存储能力
@@ -10,7 +10,8 @@ App({
         wx.setStorageSync('logs', logs)
         // 登录
         wx.login({
-            success: res => {
+            async success: res => {
+                await http.wxlogin(res.code)
                 // 发送 res.code 到后台换取 openId, sessionKey, unionId
             }
         })
@@ -36,6 +37,7 @@ App({
         })
     },
     globalData: {
-        userInfo: null
+        userInfo: null,
+        http
     }
 })
