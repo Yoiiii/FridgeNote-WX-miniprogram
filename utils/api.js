@@ -27,15 +27,15 @@ const service = {
         })
     },
     post(url, data) {
-        console.log(data)
         return new Promise((resolve, reject) => {
             wx.request({
                 method: 'post',
                 url: url,
                 data: data,
                 header: {
+                    "content-type": "application/json",
+                    "Authorization" : 'Bearer ' + (wx.getStorageSync('token') || " "),
                     //"content-type": "application/x-www-form-urlencoded"
-                    "content-type": "application/json"
                 },
                 success: (res) => {
                     // 调用接口成功
@@ -85,16 +85,17 @@ const service = {
     }
 }
 const login = (data) => {
-    return new Promise((resolve, reject) => {
-        resolve(service.post(`${config.baseUrl}/wxlogin`, data))
-    })
+    return service.post(`${config.baseUrl}/wxlogin`, data)
 }
 const test =  () => {
     return  service.get(`${config.baseUrl}/test`)
-     
+}
+const getfridgelist = (data) => {
+    return service.post(`${config.baseUrl}/getfridgelist`, data)
 }
 module.exports = {
     //登錄(獲取openID)
     login,
-    test
+    test,
+    getfridgelist
 }

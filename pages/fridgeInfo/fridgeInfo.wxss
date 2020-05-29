@@ -1,1 +1,24 @@
 /* pages/fridgeInfo/fridgeInfo.wxss */
+.van-nav-bar{
+    padding-top:0px !important;
+}
+.van-icon-bars{
+    margin-bottom: 28rpx;
+    color: #1989fa;
+}
+.van-icon-plus{
+    margin-bottom: 28rpx;
+    color: #1989fa;
+}
+.nofridge{
+    padding: 5%;
+}
+.empty{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 400rpx;
+    width: 400rpx;
+    margin-top:100rpx;
+    margin-bottom:100rpx;
+}
