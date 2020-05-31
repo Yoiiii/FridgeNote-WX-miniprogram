@@ -1,6 +1,7 @@
 const config = require('../config');
 import Dialog from '../miniprogram_npm/@vant/weapp/dialog/dialog';
 import Toast from '../miniprogram_npm/@vant/weapp/toast/toast';
+import Notify from '../miniprogram_npm/@vant/weapp/notify/notify';
 const service = {
     get(url, data) {
         return new Promise((resolve, reject) => {
@@ -39,7 +40,6 @@ const service = {
                 },
                 success: (res) => {
                     // 调用接口成功
-                    this.errorMessage(res);
                     this.requestLog(url, res);
                     resolve(res)
                 },
@@ -53,25 +53,28 @@ const service = {
         })
     },
     errorMessage(res) {
-        if (res.statusCode != 200) {
-            let code = res.statusCode.toString();
-            if (code.substring(0, 1) == "4") {
-                Dialog.alert({
-                    title: '錯誤',
-                    message: '請求出錯: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
-                }).then(() => { });
-            } else if (code.substring(0, 1) == "5") {
-                Dialog.alert({
-                    title: '錯誤',
-                    message: '服務器異常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
-                }).then(() => { });
-            } else {
-                Dialog.alert({
-                    title: '錯誤',
-                    message: '異常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
-                }).then(() => { });
-            }
+        if(res.errMsg){
+            Notify({ type: 'danger', message:res.errMsg });
         }
+        // if (res.statusCode != 200) {
+        //     let code = res.statusCode.toString();
+        //     if (code.substring(0, 1) == "4") {
+        //         Dialog.alert({
+        //             title: '錯誤',
+        //             message: '請求出錯: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
+        //         }).then(() => { });
+        //     } else if (code.substring(0, 1) == "5") {
+        //         Dialog.alert({
+        //             title: '錯誤',
+        //             message: '服務器異常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
+        //         }).then(() => { });
+        //     } else {
+        //         Dialog.alert({
+        //             title: '錯誤',
+        //             message: '異常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
+        //         }).then(() => { });
+        //     }
+        // }        
     },
     requestLog(url, res) {
         let str = url.split('/');
