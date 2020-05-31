@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "addfridge":"/components/addfridge/addfridge",
+    "goodsInfo":"/components/goodsInfo/goodsInfo",
+    "fridgeList":"/components/fridgeList/fridgeList"
+  }
 }

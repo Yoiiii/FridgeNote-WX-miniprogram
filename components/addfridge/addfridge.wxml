@@ -1,0 +1,10 @@
+<!--components/addfridge/addfridge.wxml-->
+<view class="cell-group">
+	<van-cell-group>
+		<van-field model:value="{{name}}" label="冰箱名" placeholder="请输入冰箱名" error="{{error}}" />
+	</van-cell-group>
+</view>
+
+<view class="button">
+	<van-button type="info" block round bind:click="addfridge"  loading="{{loading}}">添加冰箱</van-button>
+</view>

@@ -1,21 +1,35 @@
-<van-nav-bar title="666" bind:click-left="onClickLeft" bind:click-right="onClickRight">
+<van-nav-bar title="{{fridge.name}}" bind:click-left="openfridgeChange" bind:click-right="addGoods">
 	<van-icon name="bars" size="18" slot="left" />
 	<van-icon name="plus" size="18" slot="right" />
 </van-nav-bar>
 <view wx:if="{{hasFridge}}">
-	<view>冰箱</view>
+	<van-tabs color="#1989fa" active="{{ tabActive }}" bind:change="onChange">
+		<van-tab title="冷藏">
+		<goodsInfo/>
+		</van-tab>
+		<van-tab title="冷冻">内容 2</van-tab>
+	</van-tabs>
 </view>
 <view wx:else class="nofridge">
-	暂无冰箱
 	<image class="empty" src="https://shawyoi.cn/uploads/custom-empty-image.png">
 	</image>
+	<view class="empty-text">暂无冰箱</view>
 	<van-button type="primary" block type="info" round plain bind:click="openAddFridge">添加冰箱</van-button>
 </view>
-<van-popup show="{{ addFridge }}" closeable position="bottom" custom-style="height: 40%" bind:close="closeAddFridge">
+<van-popup show="{{addFridge}}" closeable position="bottom" custom-style="height: 40%" bind:close="closeAddFridge">
 	<view>
-		<view>
+		<view class="popup-title">
 			添加冰箱
 		</view>
+		<addfridge bindaddfridge="addFridge" model:loading="{{addFridgeloading}}" />
+	</view>
+</van-popup>
+<van-popup show="{{fridgeChange}}" closeable position="bottom" custom-style="height: 50%" bind:close="closefridgeChange">
+	<view>
+		<view class="popup-title">
+			选择冰箱
+		</view>
+		<fridgeList/>
 	</view>
 </van-popup>
 <van-notify id="van-notify" />

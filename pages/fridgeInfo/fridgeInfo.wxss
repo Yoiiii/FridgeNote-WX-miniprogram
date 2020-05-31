@@ -17,8 +17,18 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    height: 400rpx;
-    width: 400rpx;
+    height: 300rpx;
+    width: 300rpx;
     margin-top:100rpx;
-    margin-bottom:100rpx;
+    margin-bottom:50rpx;
+}
+.empty-text{
+    display: block;
+    text-align: center;
+    padding: 5%;
+    color: gray;
+}
+.popup-title{
+    text-align: center;
+    padding: 4%;
 }

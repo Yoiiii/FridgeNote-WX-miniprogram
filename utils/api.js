@@ -40,6 +40,7 @@ const service = {
                 },
                 success: (res) => {
                     // 调用接口成功
+                    this.errorMessage(res)
                     this.requestLog(url, res);
                     resolve(res)
                 },
@@ -53,28 +54,29 @@ const service = {
         })
     },
     errorMessage(res) {
-        if(res.errMsg){
+        //console.log(res);
+        if(!res.statusCode){
             Notify({ type: 'danger', message:res.errMsg });
-        }
-        // if (res.statusCode != 200) {
-        //     let code = res.statusCode.toString();
-        //     if (code.substring(0, 1) == "4") {
-        //         Dialog.alert({
-        //             title: '錯誤',
-        //             message: '請求出錯: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
-        //         }).then(() => { });
-        //     } else if (code.substring(0, 1) == "5") {
-        //         Dialog.alert({
-        //             title: '錯誤',
-        //             message: '服務器異常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
-        //         }).then(() => { });
-        //     } else {
-        //         Dialog.alert({
-        //             title: '錯誤',
-        //             message: '異常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
-        //         }).then(() => { });
-        //     }
-        // }        
+        }        
+        else if (res.statusCode != 200) {
+            let code = res.statusCode.toString();
+            if (code.substring(0, 1) == "4") {
+                Dialog.alert({
+                    title: '錯誤',
+                    message: '請求出錯: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
+                }).then(() => { });
+            } else if (code.substring(0, 1) == "5") {
+                Dialog.alert({
+                    title: '錯誤',
+                    message: '服務器異常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
+                }).then(() => { });
+            } else {
+                Dialog.alert({
+                    title: '錯誤',
+                    message: '異常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
+                }).then(() => { });
+            }
+        } 
     },
     requestLog(url, res) {
         let str = url.split('/');
@@ -96,9 +98,13 @@ const test =  () => {
 const getfridgelist = (data) => {
     return service.post(`${config.baseUrl}/getfridgelist`, data)
 }
+const addfridge = (data) => {
+    return service.post(`${config.baseUrl}/addfridge`, data)
+}
 module.exports = {
     //登錄(獲取openID)
     login,
     test,
-    getfridgelist
+    getfridgelist,
+    addfridge
 }

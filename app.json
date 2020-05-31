@@ -1,38 +1,45 @@
 {
-    "pages": [
-        "pages/fridgeInfo/fridgeInfo",
-        "pages/personal/personal"
-    ],
-    "window": {
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#fff",
-        "navigationBarTitleText": "冰箱笔记",
-        "navigationBarTextStyle": "black"
-    },
-    "tabBar": {
-        "custom": true,
-        "color": "#000000",
-        "selectedColor": "#000000",
-        "backgroundColor": "#000000",
-        "list": [
-            {
-                "pagePath": "pages/fridgeInfo/fridgeInfo",
-                "text": "冰箱"
-            },
-            {
-                "pagePath": "pages/personal/personal",
-                "text": "个人"
-            }
-        ]
-    },
-    "usingComponents": {
-        "van-tabbar": "@vant/weapp/tabbar",
-        "van-tabbar-item": "@vant/weapp/tabbar-item",
-        "van-nav-bar": "@vant/weapp/nav-bar/index",
-        "van-icon": "@vant/weapp/icon/index",
-        "van-button": "@vant/weapp/button/index",
-        "van-popup": "@vant/weapp/popup/index",
-        "van-notify": "@vant/weapp/notify/index"
-    },
-    "sitemapLocation": "sitemap.json"
+  "pages": [
+    "pages/fridgeInfo/fridgeInfo",
+    "pages/personal/personal"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "冰箱笔记",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#000000",
+    "selectedColor": "#000000",
+    "backgroundColor": "#000000",
+    "list": [
+      {
+        "pagePath": "pages/fridgeInfo/fridgeInfo",
+        "text": "冰箱"
+      },
+      {
+        "pagePath": "pages/personal/personal",
+        "text": "个人"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-tabbar": "@vant/weapp/tabbar",
+    "van-tabbar-item": "@vant/weapp/tabbar-item",
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-button": "@vant/weapp/button/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-notify": "@vant/weapp/notify/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-tab": "@vant/weapp/tab/index",
+    "van-tabs": "@vant/weapp/tabs/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index"
+  },
+  "sitemapLocation": "sitemap.json"
 }

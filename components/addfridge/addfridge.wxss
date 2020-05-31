@@ -1,0 +1,11 @@
+/* components/addfridge/addfridge.wxss */
+.cell-group{
+  margin-top: 20rpx;
+  /* margin-bottom: 20rpx; */
+  /* background-color: #f7f8fa; */
+}
+.button{
+  margin-top:20rpx;
+  margin-right: 40rpx;
+  margin-left: 40rpx;
+}
