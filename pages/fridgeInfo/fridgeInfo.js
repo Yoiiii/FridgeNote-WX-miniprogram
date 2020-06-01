@@ -8,6 +8,7 @@ Page({
         addFridge: false,
         fridgeChange: false,
         addFridgeloading: false,
+        fridgeList:[],
         fridge: {
             id: "",
             name: "我的冰箱",
@@ -49,6 +50,7 @@ Page({
         const { data } = await $http.getfridgelist(params)
         if (data.length != 0) {
             this.setData({ hasFridge: true });
+            this.setData({fridgeList:data})
         } else {
             this.setData({ hasFridge: false });
         }

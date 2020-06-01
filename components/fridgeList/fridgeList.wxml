@@ -1,9 +1,10 @@
 <van-radio-group value="{{ radio }}" bind:change="onChange">
   <van-cell-group>
-    <van-cell wx-for="{{fridgeList}}" van-cell title="{{itme.name}}" clickable data-name="{{item.id}}" bind:click="onClick">
+      <van-cell wx:for="{{propA}}" van-cell title="6{{item}}" clickable data-name="{{item._id}}" bind:click="onClick">
       <van-radio slot="right-icon" name="1" />
     </van-cell>
-    <van-cell title="单选框 2" clickable data-name="2" bind:click="onClick">
+
+    <van-cell title="{{fridgeList}}" clickable data-name="2" bind:click="onClick">
       <van-radio slot="right-icon" name="2" />
     </van-cell>
   </van-cell-group>

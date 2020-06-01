@@ -26,7 +26,7 @@
 </van-popup>
 <van-popup show="{{fridgeChange}}" closeable position="bottom" custom-style="height: 50%" bind:close="closefridgeChange">
 	<view>
-		<view class="popup-title">
+		<view class="popup-title" fridgList="{{fridgeList}}" prop-a="{{fridgeList}}">
 			选择冰箱
 		</view>
 		<fridgeList/>
