@@ -50,7 +50,10 @@ Page({
         const { data } = await $http.getfridgelist(params)
         if (data.length != 0) {
             this.setData({ hasFridge: true });
+            console.log("this.data.fridgeList11",this.data.fridgeList);
             this.setData({fridgeList:data})
+            console.log("this.data.fridgeList",this.data.fridgeList);
+            
         } else {
             this.setData({ hasFridge: false });
         }

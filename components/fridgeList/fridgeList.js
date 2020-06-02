@@ -4,26 +4,32 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    fridgeList:Array,
-    propA:Array
-  },
-  observers: {
-    'fridgeList': function(fridgeList) {
-      // 在 numberA 或者 numberB 被设置时，执行这个函数
-      this.setData({
-        fridgeList: fridgeList
-      })
-      console.log("this.data.fridgeList",this.data.fridgeList);
-      
-    }
+    List: {
+      type: Array,
+      value: [],
+      observer: function(newData, oldData){
+        console.log("111",newData);
+        
+      }
+    },
+    fridgeList:{
+      type:Array,
+      value: [],
+      observers:function(fridgeList) {
+          console.log("66666");
+          this.setData({
+            List: fridgeList
+          })
+          console.log("this.data.fridgeList",this.data.List);
+        }
+    },
   },
   lifetimes: {
+    ready(){
+    },
     attached () {
-      
-      
     },
     detached () {
-  
     }
    },
   

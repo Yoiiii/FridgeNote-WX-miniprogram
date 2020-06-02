@@ -5,6 +5,7 @@
 <view wx:if="{{hasFridge}}">
 	<van-tabs color="#1989fa" active="{{ tabActive }}" bind:change="onChange">
 		<van-tab title="冷藏">
+		<view>fridgList{{fridgeList.name}}</view>
 		<goodsInfo/>
 		</van-tab>
 		<van-tab title="冷冻">内容 2</van-tab>
@@ -26,10 +27,10 @@
 </van-popup>
 <van-popup show="{{fridgeChange}}" closeable position="bottom" custom-style="height: 50%" bind:close="closefridgeChange">
 	<view>
-		<view class="popup-title" fridgList="{{fridgeList}}" prop-a="{{fridgeList}}">
+		<view class="popup-title">
 			选择冰箱
 		</view>
-		<fridgeList/>
+		<fridgeList List="{{fridgeList}}"/>
 	</view>
 </van-popup>
 <van-notify id="van-notify" />
