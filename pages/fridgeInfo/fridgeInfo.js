@@ -8,6 +8,7 @@ Page({
         addFridge: false,
         fridgeChange: false,
         addFridgeloading: false,
+        addGoods:false,
         fridgeList:[],
         fridge: {
             id: "",
@@ -49,11 +50,10 @@ Page({
         const params = { id: app.globalData.id }
         const { data } = await $http.getfridgelist(params)
         if (data.length != 0) {
-            this.setData({ hasFridge: true });
-            console.log("this.data.fridgeList11",this.data.fridgeList);
-            this.setData({fridgeList:data})
-            console.log("this.data.fridgeList",this.data.fridgeList);
-            
+            this.setData({
+                 hasFridge: true,
+                fridgeList:data 
+            });            
         } else {
             this.setData({ hasFridge: false });
         }
@@ -79,7 +79,6 @@ Page({
                 addFridgeloading: false,
             })
         }
-
     },
     openfridgeChange() {
         this.setData({ fridgeChange: true });
@@ -87,8 +86,29 @@ Page({
     closefridgeChange() {
         this.setData({ fridgeChange: false });
     },
-    fridgeChange() {
-
+    fridgeChange(e) {
+        //console.log("e",e.detail);
+        this.setData({
+            "fridge.id":this.data.fridgeList[e.detail]._id,
+            "fridge.name":this.data.fridgeList[e.detail].name,
+            fridgeChange: false
+        })
+        this.getGoodsList(this.data.fridgeList[0]._id)
+    },
+    async getGoodsList(id){
+        //console.log(id);
+        const res = await $http.getgoodslist({id:id})
+        console.log(res);
+    },
+    openaddGoods(){
+        this.setData({
+            addGoods:true
+        })
+    },
+    closeaddGoods(){
+        this.setData({
+            addGoods:false
+        })
     },
     addGoods() {
 

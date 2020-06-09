@@ -53,6 +53,34 @@ const service = {
             })
         })
     },
+    upload(url, data) {
+        return new Promise((resolve, reject) => {
+            wx.uploadFile({
+                url: url, // 仅为示例，非真实的接口地址
+                filePath: data.path,
+                name: 'file',
+                formData: { user: 'test' },
+                header: {
+                    "content-type": "application/json",
+                    "Authorization" : 'Bearer ' + (wx.getStorageSync('token') || " "),
+                    //"content-type": "application/x-www-form-urlencoded"
+                },
+                success: (res) => {
+                    // 调用接口成功
+                    this.errorMessage(res)
+                    this.requestLog(url, res);
+                    var jsonObj = JSON.parse(res.data);
+                    resolve(jsonObj)
+                },
+                fail: (err) => {
+                    // 调用接口失败
+                    this.errorMessage(err);
+                    this.requestLog(url, err);
+                    reject(err)
+                }
+              });
+        })
+    },
     errorMessage(res) {
         //console.log(res);
         if(!res.statusCode){
@@ -101,10 +129,19 @@ const getfridgelist = (data) => {
 const addfridge = (data) => {
     return service.post(`${config.baseUrl}/addfridge`, data)
 }
+const getgoodslist = (data) => {
+    return service.post(`${config.baseUrl}/getgoodslist`, data)
+}
+const upload = (data)=>{
+    return service.upload(`${config.baseUrl}/upload`, data)
+
+}
 module.exports = {
     //登錄(獲取openID)
     login,
     test,
     getfridgelist,
-    addfridge
+    addfridge,
+    getgoodslist,
+    upload,
 }

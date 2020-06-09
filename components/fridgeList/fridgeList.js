@@ -7,21 +7,10 @@ Component({
     List: {
       type: Array,
       value: [],
-      observer: function(newData, oldData){
-        console.log("111",newData);
+      // observer: function(newData, oldData){
+      //   console.log("111",newData);
         
-      }
-    },
-    fridgeList:{
-      type:Array,
-      value: [],
-      observers:function(fridgeList) {
-          console.log("66666");
-          this.setData({
-            List: fridgeList
-          })
-          console.log("this.data.fridgeList",this.data.List);
-        }
+      // }
     },
   },
   lifetimes: {
@@ -44,6 +33,9 @@ Component({
    * 组件的方法列表
    */
   methods: {
-
+    onClick(event){
+      //console.log("item._id",event.target);
+      this.triggerEvent('fridgeChange', event.target.dataset.index)
+    }
   }
 })

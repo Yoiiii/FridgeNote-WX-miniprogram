@@ -1,0 +1,11 @@
+/* components/addgoods/addgoods.wxss */
+.input{
+  width: 0 !important;
+}
+.upload{
+  margin-top: 20rpx;
+}
+.radio{
+  display: flex !important;
+  flex-direction: row !important;
+}

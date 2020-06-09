@@ -1,4 +1,4 @@
-<van-nav-bar title="{{fridge.name}}" bind:click-left="openfridgeChange" bind:click-right="addGoods">
+<van-nav-bar title="{{fridge.name}}" bind:click-left="openfridgeChange" bind:click-right="openaddGoods">
 	<van-icon name="bars" size="18" slot="left" />
 	<van-icon name="plus" size="18" slot="right" />
 </van-nav-bar>
@@ -30,7 +30,15 @@
 		<view class="popup-title">
 			选择冰箱
 		</view>
-		<fridgeList List="{{fridgeList}}"/>
+		<fridgeList List="{{fridgeList}}" bind:fridgeChange="fridgeChange"/>
+	</view>
+</van-popup>
+<van-popup show="{{addGoods}}" closeable position="bottom" custom-style="height: 90%" bind:close="closeaddGoods">
+	<view>
+		<view class="popup-title">
+			添加物品
+		</view>
+		<addgoods  bind:addGoods="addGoods"/>
 	</view>
 </van-popup>
 <van-notify id="van-notify" />

@@ -1,7 +1,6 @@
 <van-radio-group wx:if="{{List}}" value="{{ radio }}" bind:change="onChange">
 	<van-cell-group>
-		<van-cell wx:for="{{List}}" van-cell title="{{item.name}}" clickable data-name="{{item._id}}" bind:click="onClick">
-			<van-radio slot="right-icon" name="1" />
+		<van-cell wx:for="{{List}}" van-cell title="{{item.name}}" clickable data-id="{{item._id}}" data-index="{{index}}" bind:click="onClick">
 		</van-cell>
 	</van-cell-group>
 </van-radio-group>

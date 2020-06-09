@@ -2,6 +2,7 @@
   "usingComponents": {
     "addfridge":"/components/addfridge/addfridge",
     "goodsInfo":"/components/goodsInfo/goodsInfo",
-    "fridgeList":"/components/fridgeList/fridgeList"
+    "fridgeList":"/components/fridgeList/fridgeList",
+    "addgoods":"/components/addgoods/addgoods"
   }
 }
