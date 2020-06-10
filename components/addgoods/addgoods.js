@@ -1,18 +1,23 @@
 // components/addgoods/addgoods.js
 const app = getApp();
 const $http = app.globalData.http;
+import util from "../../utils/util"
 Component({
-  /**
-   * 组件的属性列表
-   */
-
   properties: {
 
   },
+  lifetimes: {
+    attached: function() {
+      // let date=new Date()
+      // let nowday = date.getFullYear()+"-"+date.getMonth()+1+"-"+date.getDay()
+      // this.setData({
+      //   "model.outDate":nowday
+      // })
+    },
+    detached: function() {
+    },
+  },
 
-  /**
-   * 组件的初始数据
-   */
   data: {
     fileList: [],
     nameVerify: true,
@@ -30,26 +35,15 @@ Component({
     currentDate: new Date().getTime(),
     formatter(type, value) {
       if (type === 'year') {
-        return `${value}+`;
+        return `${value}`;
       } else if (type === 'month') {
         return `${value}`;
       }
       return value;
     },
     loading:false,
-    // "name" : "鸡扒",
-    // "count" : 8,
-    // "inDate" : ISODate("2020-04-30T06:19:43.196Z"),
-    // "exp" : 364,
-    // "outDate" : ISODate("2021-04-29T16:00:00.000Z"),
-    // "image" : "",
-    // "type" : 2,
-    // "owner" : ObjectId("5eaa6df8726ef37be7e08982"),
   },
 
-  /**
-   * 组件的方法列表
-   */
   methods: {
     async afterRead(event) {
       const { file } = event.detail;
@@ -85,8 +79,9 @@ Component({
       });
     },
     outDateChange(event){
+      let outDate =util.formatTime2(new Date(event.detail),"yyyy-MM-dd")      
       this.setData({
-        "model.outDate": event.detail,
+        "model.outDate": outDate,
       });
     }
   }
