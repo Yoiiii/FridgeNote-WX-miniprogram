@@ -27,9 +27,8 @@
 	</van-field>
 </van-cell-group>
 <view class="button">
-<van-button type="info"  block round bind:click="addGoods" loading="{{loading}}">添加物品</van-button>
+	<van-button type="info"  block round bind:click="addGoods" loading="{{loading}}">添加物品</van-button>
 </view>
-
 <van-popup show="{{showOutDate}}" position="bottom" custom-style="height: 60%" bind:close="closeOutDate">
 	<van-datetime-picker 
 		type="date" 

@@ -32,12 +32,13 @@ App({
                         }
                     })
                 }
-            }
+            } 
         })
     },
-    globalData: {
+    globalData: {  
         userInfo: null,
         http,
-        id:null
+        id:null,
+        fridgeId:null
     }
 })

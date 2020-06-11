@@ -23,7 +23,7 @@ Component({
     nameVerify: true,
     model: {
       name: null,
-      count: 0,
+      count: 1,
       image: null,
       owner: null,
       type: '1',
@@ -83,6 +83,39 @@ Component({
       this.setData({
         "model.outDate": outDate,
       });
+    },
+    verify(){
+      if(this.data.model.name!= null){
+        return true
+      }else
+      {
+        this.setData({
+          nameVerify:false
+        })
+        return false
+      }
+    },
+    async addGoods(){
+      this.setData({
+        loading: true
+      })
+      console.log(this.data.model);
+      let result = verify()
+      if(result){
+        this.setData({
+          "model.owner":app.globalData.id
+        })
+        const res = await $http.addGoods(this.data.model)
+        if(res.data){
+          this.setData({
+            loading: false
+          })
+          this.triggerEvent('addGoods', true)
+        }
+      }else{
+      this.triggerEvent('addGoods', false)
+
+      }
     }
   }
 })

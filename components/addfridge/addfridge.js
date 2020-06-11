@@ -1,33 +1,44 @@
 // components/addfridge/addfridge.js
-const app =getApp()
+const app = getApp();
+const $http = app.globalData.http;
 Component({
   properties: {
-    loading:Boolean
+    loading: Boolean
   },
   data: {
-    model:{
-      name:null,
-      owner:null
+    model: {
+      name: null,
+      owner: null
     },
-    name:null,
-    error:false,
-    
+    name: null,
+    error: false,
   },
   methods: {
-    addfridge(){
-      console.log(this.data.name);
-      if(this.data.name){
+    //点击添加冰箱按钮
+    async addfridge() {
+      this.setData({
+        loading: true
+      })
+      if (this.data.name) {
         this.setData({
-          'model.owner':app.globalData.id,
-          'model.name':this.data.name
+          'model.owner': app.globalData.id,
+          'model.name': this.data.name
         })
-        this.triggerEvent('addfridge', this.data.model)
+        const res = await $http.addfridge(this.data.model)
+        if (res.data) {
+          //Notify({ type: 'success', message: "添加成功" });
+          this.setData({
+            loading: false
+          })
+          this.triggerEvent('addfridge', true)
+        } 
+        else 
+        {
+          //Notify({ type: 'success', message: "添加成功" });
+        }
+      } else {
         this.setData({
-          loading:true
-        })
-      }else{
-        this.setData({
-          error:true
+          error: true
         })
       }
     }

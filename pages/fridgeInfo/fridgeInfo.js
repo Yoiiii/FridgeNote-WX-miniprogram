@@ -1,6 +1,7 @@
 // pages/fridgeInfo/fridgeInfo.js
 const app = getApp();
 const $http = app.globalData.http;
+import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify'
 Page({
     data: {
         active: 'fridgeInfo',
@@ -8,15 +9,15 @@ Page({
         addFridge: false,
         fridgeChange: false,
         addFridgeloading: false,
-        addGoods:false,
-        fridgeList:[],
+        addGoods: false,
+        fridgeList: [],
         fridge: {
             id: "",
             name: "我的冰箱",
             cold: [],
             freeze: []
         },
-        tabActive:0
+        tabActive: 0
     },
     onLoad: function (options) {
         if (app.globalData.id) {
@@ -26,7 +27,6 @@ Page({
                 this.getfridgelist()
             }
         }
-
     },
     onShow: function () {
         if (typeof this.getTabBar === 'function' &&
@@ -51,9 +51,9 @@ Page({
         const { data } = await $http.getfridgelist(params)
         if (data.length != 0) {
             this.setData({
-                 hasFridge: true,
-                fridgeList:data 
-            });            
+                hasFridge: true,
+                fridgeList: data
+            });
         } else {
             this.setData({ hasFridge: false });
         }
@@ -64,20 +64,15 @@ Page({
     closeAddFridge() {
         this.setData({ addFridge: false });
     },
-    async addFridge(e) {
-        const res = await $http.addfridge(e.detail)
-        console.log(res);
-        if(res.data){
-            Notify({ type: 'success', message:"添加成功" });
+    addFridge(e) {
+        if (e.detail) {
+            Notify({ type: 'success', message: "添加成功" });
             this.setData({
-                addFridgeloading: false,
                 addFridge: false,
             })
             this.getfridgelist()
-        }else{
-            this.setData({
-                addFridgeloading: false,
-            })
+        } else {
+            Notify({ type: 'danger', message: "添加失败" });
         }
     },
     openfridgeChange() {
@@ -89,29 +84,38 @@ Page({
     fridgeChange(e) {
         //console.log("e",e.detail);
         this.setData({
-            "fridge.id":this.data.fridgeList[e.detail]._id,
-            "fridge.name":this.data.fridgeList[e.detail].name,
+            "fridge.id": this.data.fridgeList[e.detail]._id,
+            "fridge.name": this.data.fridgeList[e.detail].name,
             fridgeChange: false
         })
         this.getGoodsList(this.data.fridgeList[0]._id)
     },
-    async getGoodsList(id){
+    async getGoodsList(id) {
         //console.log(id);
-        const res = await $http.getgoodslist({id:id})
+        const res = await $http.getgoodslist({ id: id })
         console.log(res);
     },
-    openaddGoods(){
+    openaddGoods() {
+        if (this.data.fridgeList.length == 0) {
+            this.setData({ addFridge: true })
+        } else {
+            this.setData({ addGoods: true })
+        }
+    },
+    closeaddGoods() {
         this.setData({
-            addGoods:true
+            addGoods: false
         })
     },
-    closeaddGoods(){
-        this.setData({
-            addGoods:false
-        })
-    },
-    addGoods() {
-
+    addGoods(e) {
+        if (e.detail) {
+            Notify({ type: 'success', message: "添加成功" });
+            this.setData({
+                addGoods: false,
+            })
+            this.getfridgelist()
+        } else {
+            Notify({ type: 'danger', message: "添加失败" });
+        }
     }
-
 })

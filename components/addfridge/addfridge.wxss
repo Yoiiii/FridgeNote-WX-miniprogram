@@ -7,4 +7,5 @@
 .button{
   margin-right: 40rpx;
   margin-left: 40rpx;
+  margin-top: 40rpx;
 }

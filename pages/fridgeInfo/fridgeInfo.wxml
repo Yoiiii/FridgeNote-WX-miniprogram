@@ -22,7 +22,7 @@
 		<view class="popup-title">
 			添加冰箱
 		</view>
-		<addfridge bindaddfridge="addFridge" model:loading="{{addFridgeloading}}" />
+		<addfridge bindaddfridge="addFridge"/>
 	</view>
 </van-popup>
 <van-popup show="{{fridgeChange}}" closeable position="bottom" custom-style="height: 50%" bind:close="closefridgeChange">
@@ -33,7 +33,7 @@
 		<fridgeList List="{{fridgeList}}" bind:fridgeChange="fridgeChange"/>
 	</view>
 </van-popup>
-<van-popup show="{{addGoods}}" closeable position="bottom" custom-style="height: 90%" bind:close="closeaddGoods">
+<van-popup show="{{addGoods}}" closeable position="bottom" custom-style="height: 70%" bind:close="closeaddGoods">
 	<view>
 		<view class="popup-title">
 			添加物品
