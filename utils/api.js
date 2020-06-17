@@ -35,16 +35,20 @@ const service = {
                 data: data,
                 header: {
                     "content-type": "application/json",
-                    "Authorization" : 'Bearer ' + (wx.getStorageSync('token') || " "),
+                    "Authorization": 'Bearer ' + (wx.getStorageSync('token') || " "),
                     //"content-type": "application/x-www-form-urlencoded"
                 },
                 success: (res) => {
                     // 调用接口成功
                     this.errorMessage(res)
                     this.requestLog(url, res);
-                    resolve(res)
+                    if (res.statusCode == 200) {
+                        resolve(res)
+                    }
+                    resolve(res.statusCode)
                 },
                 fail: (err) => {
+                    console.log(err);
                     // 调用接口失败
                     this.errorMessage(err);
                     this.requestLog(url, err);
@@ -62,14 +66,13 @@ const service = {
                 formData: { user: 'test' },
                 header: {
                     "content-type": "application/json",
-                    "Authorization" : 'Bearer ' + (wx.getStorageSync('token') || " "),
+                    "Authorization": 'Bearer ' + (wx.getStorageSync('token') || " "),
                     //"content-type": "application/x-www-form-urlencoded"
                 },
                 success: (res) => {
                     // 调用接口成功
                     this.errorMessage(res)
                     this.requestLog(url, res);
-                    var jsonObj = JSON.parse(res.data);
                     resolve(jsonObj)
                 },
                 fail: (err) => {
@@ -78,33 +81,33 @@ const service = {
                     this.requestLog(url, err);
                     reject(err)
                 }
-              });
+            });
         })
     },
     errorMessage(res) {
-        //console.log(res);
-        if(!res.statusCode){
-            Notify({ type: 'danger', message:res.errMsg });
-        }        
+        if (!res.statusCode) {
+            Notify({ type: 'danger', message: res.errMsg });
+        }
         else if (res.statusCode != 200) {
             let code = res.statusCode.toString();
             if (code.substring(0, 1) == "4") {
                 Dialog.alert({
-                    title: '錯誤',
-                    message: '請求出錯: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
+                    title: '错误',
+                    message: '请求出错: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
                 }).then(() => { });
+
             } else if (code.substring(0, 1) == "5") {
                 Dialog.alert({
-                    title: '錯誤',
-                    message: '服務器異常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
+                    title: '错误',
+                    message: '服务器异常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
                 }).then(() => { });
             } else {
                 Dialog.alert({
-                    title: '錯誤',
-                    message: '異常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
+                    title: '错误',
+                    message: '异常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
                 }).then(() => { });
             }
-        } 
+        }
     },
     requestLog(url, res) {
         let str = url.split('/');
@@ -120,8 +123,8 @@ const service = {
 const login = (data) => {
     return service.post(`${config.baseUrl}/wxlogin`, data)
 }
-const test =  () => {
-    return  service.get(`${config.baseUrl}/test`)
+const test = () => {
+    return service.get(`${config.baseUrl}/test`)
 }
 const getfridgelist = (data) => {
     return service.post(`${config.baseUrl}/getfridgelist`, data)
@@ -129,12 +132,13 @@ const getfridgelist = (data) => {
 const addfridge = (data) => {
     return service.post(`${config.baseUrl}/addfridge`, data)
 }
+const addgoods = (data) => service.post(`${config.baseUrl}/addgoods`, data)
+
 const getgoodslist = (data) => {
     return service.post(`${config.baseUrl}/getgoodslist`, data)
 }
-const upload = (data)=>{
+const upload = (data) => {
     return service.upload(`${config.baseUrl}/upload`, data)
-
 }
 module.exports = {
     //登錄(獲取openID)
@@ -144,4 +148,5 @@ module.exports = {
     addfridge,
     getgoodslist,
     upload,
+    addgoods,
 }

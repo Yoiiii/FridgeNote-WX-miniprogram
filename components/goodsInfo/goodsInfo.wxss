@@ -1,1 +1,11 @@
 /* components/goodsInfo/goodsInfo.wxss */
+.block{
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    padding: 10rpx;
+}
+.info{
+    padding-left: 10rpx;
+    padding-right: 10rpx;
+}

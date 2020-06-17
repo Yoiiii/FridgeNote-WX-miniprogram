@@ -7,14 +7,14 @@ Component({
 
   },
   lifetimes: {
-    attached: function() {
+    attached: function () {
       // let date=new Date()
       // let nowday = date.getFullYear()+"-"+date.getMonth()+1+"-"+date.getDay()
       // this.setData({
       //   "model.outDate":nowday
       // })
     },
-    detached: function() {
+    detached: function () {
     },
   },
 
@@ -27,9 +27,9 @@ Component({
       image: null,
       owner: null,
       type: '1',
-      outDate:null
+      outDate: null
     },
-    showOutDate:false,
+    showOutDate: false,
     minDate: new Date().getTime(),
     maxDate: new Date(2099, 12, 31).getTime(),
     currentDate: new Date().getTime(),
@@ -41,7 +41,7 @@ Component({
       }
       return value;
     },
-    loading:false,
+    loading: false,
   },
 
   methods: {
@@ -58,63 +58,77 @@ Component({
       });
       console.log("this.data.fileList", this.data.fileList);
     },
+    nameChange(event) {
+      this.setData({
+        "model.name": event.detail,
+      });
+    },
     typeChange(event) {
       this.setData({
         "model.type": event.detail,
       });
     },
-    countChange(event){
+    countChange(event) {
       this.setData({
         "model.count": event.detail,
       });
     },
-    openOutDate(){
+    openOutDate() {
       this.setData({
         showOutDate: true,
       });
     },
-    closeOutDate(){
+    closeOutDate() {
       this.setData({
         showOutDate: false,
       });
     },
-    outDateChange(event){
-      let outDate =util.formatTime2(new Date(event.detail),"yyyy-MM-dd")      
+    outDateChange(event) {
+      let outDate = util.formatTime2(new Date(event.detail), "yyyy-MM-dd")
       this.setData({
         "model.outDate": outDate,
       });
     },
-    verify(){
-      if(this.data.model.name!= null){
+    verify() {
+      if (this.data.model.name != null && this.data.model.name != "") {
         return true
-      }else
-      {
+      } else {
         this.setData({
-          nameVerify:false
+          nameVerify: false
         })
         return false
       }
     },
-    async addGoods(){
+    async addGoods() {
       this.setData({
         loading: true
       })
       console.log(this.data.model);
-      let result = verify()
-      if(result){
+      let result = this.verify()
+      if (result) {
         this.setData({
-          "model.owner":app.globalData.id
+          "model.owner": app.globalData.fridgeId
         })
-        const res = await $http.addGoods(this.data.model)
-        if(res.data){
+        const res = await $http.addgoods(this.data.model)
+        console.log(res);
+        if (res.data) {
           this.setData({
             loading: false
           })
           this.triggerEvent('addGoods', true)
         }
-      }else{
-      this.triggerEvent('addGoods', false)
-
+        else {
+          this.setData({
+            loading: false
+          })
+          //this.triggerEvent('addGoods', false)
+        }
+      }
+      else {
+        this.setData({
+          loading: false
+        })
+        //this.triggerEvent('addGoods', false)
       }
     }
   }

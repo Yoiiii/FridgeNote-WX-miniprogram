@@ -10,6 +10,7 @@ Page({
         fridgeChange: false,
         addFridgeloading: false,
         addGoods: false,
+        loading: true,
         fridgeList: [],
         fridge: {
             id: "",
@@ -19,12 +20,28 @@ Page({
         },
         tabActive: 0
     },
-    onLoad: function (options) {
+    onLoad: async function (options) {
         if (app.globalData.id) {
-            this.getfridgelist()
+            await this.getfridgelist()
+            if (this.data.hasFridge) {
+                this.setData({
+                    "fridge.id": this.data.fridgeList[0]._id,
+                    "fridge.name": this.data.fridgeList[0].name
+                })
+                app.globalData.fridgeId=this.data.fridgeList[0]._id
+                this.getGoodsList()
+            }
         } else {
-            app.userIdReadyCallback = res => {
-                this.getfridgelist()
+            app.userIdReadyCallback = async res => {
+                await this.getfridgelist()
+                if (this.data.hasFridge) {
+                    this.setData({
+                        "fridge.id": this.data.fridgeList[0]._id,
+                        "fridge.name": this.data.fridgeList[0].name
+                    })
+                    app.globalData.fridgeId=this.data.fridgeList[0]._id
+                    this.getGoodsList()
+                }
             }
         }
     },
@@ -45,6 +62,9 @@ Page({
     onShareAppMessage: function () {
 
     },
+    overLoading() {
+        this.setData({ loading: false })
+    },
     //获取冰箱列表
     async getfridgelist() {
         const params = { id: app.globalData.id }
@@ -54,9 +74,15 @@ Page({
                 hasFridge: true,
                 fridgeList: data
             });
+            this.overLoading()
         } else {
             this.setData({ hasFridge: false });
         }
+    },
+    async getGoodsList() {
+        const params = { id: this.data.fridge.id }
+        const { data } = await $http.getgoodslist(params)
+        console.log(data);
     },
     openAddFridge() {
         this.setData({ addFridge: true });
@@ -88,12 +114,7 @@ Page({
             "fridge.name": this.data.fridgeList[e.detail].name,
             fridgeChange: false
         })
-        this.getGoodsList(this.data.fridgeList[0]._id)
-    },
-    async getGoodsList(id) {
-        //console.log(id);
-        const res = await $http.getgoodslist({ id: id })
-        console.log(res);
+        this.getGoodsList()
     },
     openaddGoods() {
         if (this.data.fridgeList.length == 0) {
@@ -113,9 +134,9 @@ Page({
             this.setData({
                 addGoods: false,
             })
-            this.getfridgelist()
+            this.getGoodsList()
         } else {
             Notify({ type: 'danger', message: "添加失败" });
         }
     }
-})
+})  

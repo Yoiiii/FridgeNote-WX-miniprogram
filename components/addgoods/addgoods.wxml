@@ -1,9 +1,10 @@
 <van-cell-group>
 	<van-field 
 		value="{{ model.name }}" 
-		label="冰箱名" 
-		placeholder="请输入冰箱名" 
-		error="{{!nameVerify}}" 
+		label="物品名" 
+		placeholder="请输入物品名" 
+		error="{{!nameVerify}}"
+		bind:change="nameChange"
 	/>
 	<van-field input-class="input" label="相片">
 		<van-uploader 

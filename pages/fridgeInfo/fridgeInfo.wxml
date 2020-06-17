@@ -5,8 +5,8 @@
 <view wx:if="{{hasFridge}}">
 	<van-tabs color="#1989fa" active="{{ tabActive }}" bind:change="onChange">
 		<van-tab title="冷藏">
-		<view>fridgList{{fridgeList.name}}</view>
-		<goodsInfo/>
+			<view>fridgList{{fridgeList.name}}</view>
+			<goodsInfo />
 		</van-tab>
 		<van-tab title="冷冻">内容 2</van-tab>
 	</van-tabs>
@@ -22,7 +22,7 @@
 		<view class="popup-title">
 			添加冰箱
 		</view>
-		<addfridge bindaddfridge="addFridge"/>
+		<addfridge bindaddfridge="addFridge" />
 	</view>
 </van-popup>
 <van-popup show="{{fridgeChange}}" closeable position="bottom" custom-style="height: 50%" bind:close="closefridgeChange">
@@ -30,7 +30,7 @@
 		<view class="popup-title">
 			选择冰箱
 		</view>
-		<fridgeList List="{{fridgeList}}" bind:fridgeChange="fridgeChange"/>
+		<fridgeList List="{{fridgeList}}" bind:fridgeChange="fridgeChange" />
 	</view>
 </van-popup>
 <van-popup show="{{addGoods}}" closeable position="bottom" custom-style="height: 70%" bind:close="closeaddGoods">
@@ -38,7 +38,15 @@
 		<view class="popup-title">
 			添加物品
 		</view>
-		<addgoods  bind:addGoods="addGoods"/>
+		<addgoods bind:addGoods="addGoods" />
 	</view>
 </van-popup>
 <van-notify id="van-notify" />
+<van-dialog id="van-dialog" />
+<van-overlay show="{{ loading }}">
+	<view class="block">
+		<view class="wrapper">
+			<van-loading size="24px" vertical >加载中...</van-loading>
+		</view>
+	</view>
+</van-overlay>

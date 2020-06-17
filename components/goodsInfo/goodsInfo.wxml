@@ -1,2 +1,16 @@
-<!--components/goodsInfo/goodsInfo.wxml-->
-<text>components/goodsInfo/goodsInfo.wxml</text>
+<view class="block">
+<view class="image">
+<van-image
+  width="100"
+  height="100"
+  use-loading-slot
+  lazy-load
+  src="https://img.yzcdn.cn/vant/cat.jpeg"
+/>
+</view>
+<view class="info">
+<view class="name">name</view>
+<view class="inDate">inDate</view>
+<view class="exp">exp <van-stepper value="{{ 1 }}" slot="button" bind:change="countChange" /></view>
+</view>
+</view>
