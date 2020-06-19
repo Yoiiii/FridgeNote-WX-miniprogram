@@ -1,16 +1,13 @@
 <view class="block">
-<view class="image">
-<van-image
-  width="100"
-  height="100"
-  use-loading-slot
-  lazy-load
-  src="https://img.yzcdn.cn/vant/cat.jpeg"
-/>
-</view>
-<view class="info">
-<view class="name">name</view>
-<view class="inDate">inDate</view>
-<view class="exp">exp <van-stepper value="{{ 1 }}" slot="button" bind:change="countChange" /></view>
-</view>
+	<view class="image">
+		<van-image width="100" height="100" use-loading-slot lazy-load fit="cover" src="{{goods.image}}" />
+	</view>
+	<view class="info">
+		<view class="name">{{goods.name}}喵猫</view>
+		<view class="inDate">{{goods.inDate}}存入</view>
+		<view class="exp">
+            <view>还有{{goods.exp}}天过期</view>
+			<van-stepper value="{{goods.count}}" slot="button" bind:change="countChange" />
+		</view>
+	</view>
 </view>

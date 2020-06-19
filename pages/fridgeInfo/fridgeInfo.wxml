@@ -5,10 +5,11 @@
 <view wx:if="{{hasFridge}}">
 	<van-tabs color="#1989fa" active="{{ tabActive }}" bind:change="onChange">
 		<van-tab title="冷藏">
-			<view>fridgList{{fridgeList.name}}</view>
-			<goodsInfo />
+			<goodsInfo wx:for="{{fridge.cold}}" goods="{{item}}"/>
 		</van-tab>
-		<van-tab title="冷冻">内容 2</van-tab>
+		<van-tab title="冷冻">
+		<goodsInfo wx:for="{{fridge.freeze}}" goods="{{item}}"/>
+		</van-tab>
 	</van-tabs>
 </view>
 <view wx:else class="nofridge">

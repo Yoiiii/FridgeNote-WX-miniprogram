@@ -1,6 +1,7 @@
 // pages/fridgeInfo/fridgeInfo.js
 const app = getApp();
 const $http = app.globalData.http;
+const utils =require("../../utils/util")
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify'
 Page({
     data: {
@@ -82,6 +83,27 @@ Page({
     async getGoodsList() {
         const params = { id: this.data.fridge.id }
         const { data } = await $http.getgoodslist(params)
+        const nowDate=utils.formatTime2(new Date(),"yyyy-MM-dd")
+        let cold=[]
+        let freeze=[]
+        data.map(item =>{
+            item.inDate=utils.formatTime2(new Date(item.inDate),"yyyy-MM-dd"),
+            item.exp=utils.getDaysBetween(nowDate,utils.formatTime2(new Date(item.outDate),"yyyy-MM-dd"))
+            return item
+        })
+        console.log(data);
+        
+        data.forEach((item, index) => {
+            if(item.type==1){
+                cold.push(item)
+            }else if(item.type==2){
+                freeze.push(item)
+            }
+        })
+        this.setData({
+            "fridge.cold":cold,
+            "fridge.freeze":freeze
+        })
         console.log(data);
     },
     openAddFridge() {

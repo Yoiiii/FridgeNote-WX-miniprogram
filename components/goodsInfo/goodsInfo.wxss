@@ -4,8 +4,27 @@
     display: flex;
     flex-direction: row;
     padding: 10rpx;
+    
 }
 .info{
+    display: flex;
+    flex-direction: column;
     padding-left: 10rpx;
     padding-right: 10rpx;
+    justify-content: space-between;
+    flex-grow:1
+}
+.exp{
+    margin-top:auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.name{
+    
+    margin-bottom: 10rpx;
+}
+.inDate{
+    
 }
