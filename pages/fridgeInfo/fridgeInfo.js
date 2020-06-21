@@ -91,8 +91,6 @@ Page({
             item.exp=utils.getDaysBetween(nowDate,utils.formatTime2(new Date(item.outDate),"yyyy-MM-dd"))
             return item
         })
-        console.log(data);
-        
         data.forEach((item, index) => {
             if(item.type==1){
                 cold.push(item)
@@ -160,5 +158,11 @@ Page({
         } else {
             Notify({ type: 'danger', message: "添加失败" });
         }
+    },
+
+    //goodsInfo组件事件
+    countChange(e){
+        console.log(e.detail);
+        
     }
 })  

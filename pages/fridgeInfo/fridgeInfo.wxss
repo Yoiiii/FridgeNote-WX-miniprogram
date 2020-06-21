@@ -43,3 +43,9 @@
     height: 100%;
     background-color: #fff;
   }
+  .nomore{
+      display: block;
+      text-align: center;
+      margin: 10rpx;
+     color: gray; 
+    }

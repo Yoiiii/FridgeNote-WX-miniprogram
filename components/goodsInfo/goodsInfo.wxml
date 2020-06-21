@@ -1,13 +1,18 @@
-<view class="block">
-	<view class="image">
-		<van-image width="100" height="100" use-loading-slot lazy-load fit="cover" src="{{goods.image}}" />
-	</view>
-	<view class="info">
-		<view class="name">{{goods.name}}喵猫</view>
-		<view class="inDate">{{goods.inDate}}存入</view>
-		<view class="exp">
-            <view>还有{{goods.exp}}天过期</view>
-			<van-stepper value="{{goods.count}}" slot="button" bind:change="countChange" />
+<van-swipe-cell id="swipe-cell" right-width="{{ 65 }}" async-close bind:close="onClose">
+	<view slot="right">全部取出</view>
+	<view class="block">
+		<view class="image">
+			<van-image width="100" height="100" use-loading-slot lazy-load fit="cover" src="{{goods.image}}" />
+		</view>
+		<view class="info">
+			<view class="name">{{goods.name}}</view>
+			<view class="inDate">{{goods.inDate}}存入</view>
+			<view class="exp">
+				<view wx:if="{{goods.exp > 0}}">还有{{goods.exp}}天过期</view>
+				<view wx:elif="{{goods.exp == 0}}">今天过期</view>
+				<view wx:else>已经过期{{goods.exp}}天</view>
+				<van-stepper value="{{goods.count}}" slot="button" bind:change="countChange" />
+			</view>
 		</view>
 	</view>
-</view>
+</van-swipe-cell>

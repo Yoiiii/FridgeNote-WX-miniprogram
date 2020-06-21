@@ -5,10 +5,12 @@
 <view wx:if="{{hasFridge}}">
 	<van-tabs color="#1989fa" active="{{ tabActive }}" bind:change="onChange">
 		<van-tab title="冷藏">
-			<goodsInfo wx:for="{{fridge.cold}}" goods="{{item}}"/>
+			<goodsInfo bindcountChange="countChange" wx:for="{{fridge.cold}}" goods="{{item}}" wx:key="_id" />
+			<view class="nomore">暂无更多..</view>
 		</van-tab>
 		<van-tab title="冷冻">
-		<goodsInfo wx:for="{{fridge.freeze}}" goods="{{item}}"/>
+			<goodsInfo wx:for="{{fridge.freeze}}" goods="{{item}}" wx:key="_id" />
+			<view class="nomore">暂无更多..</view>
 		</van-tab>
 	</van-tabs>
 </view>
@@ -47,7 +49,7 @@
 <van-overlay show="{{ loading }}">
 	<view class="block">
 		<view class="wrapper">
-			<van-loading size="24px" vertical >加载中...</van-loading>
+			<van-loading size="24px" vertical>加载中...</van-loading>
 		</view>
 	</view>
 </van-overlay>
