@@ -73,7 +73,7 @@ const service = {
                     // 调用接口成功
                     this.errorMessage(res)
                     this.requestLog(url, res);
-                    resolve(jsonObj)
+                    resolve(res)
                 },
                 fail: (err) => {
                     // 调用接口失败
@@ -140,6 +140,9 @@ const getgoodslist = (data) => {
 const upload = (data) => {
     return service.upload(`${config.baseUrl}/upload`, data)
 }
+const goodscountchange = (data)=> service.post(`${config.baseUrl}/goodscountchange`,data)
+
+const delgoods = data => service.post(`${config.baseUrl}/delgoods`,data)
 module.exports = {
     //登錄(獲取openID)
     login,
@@ -149,4 +152,6 @@ module.exports = {
     getgoodslist,
     upload,
     addgoods,
+    goodscountchange,
+    delgoods
 }

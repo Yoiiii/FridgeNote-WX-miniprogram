@@ -29,3 +29,14 @@
 .inDate{
     
 }
+.right{
+    color: white;
+    background:rgb(238, 10, 36) ;
+    height: 100%;
+    width: 100%;
+    padding: 16%;
+    align-items: center;
+}
+.right-1{
+    margin-top:60%;
+}

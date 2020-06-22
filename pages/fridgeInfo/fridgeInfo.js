@@ -78,6 +78,7 @@ Page({
             this.overLoading()
         } else {
             this.setData({ hasFridge: false });
+            this.overLoading()
         }
     },
     async getGoodsList() {
@@ -142,6 +143,7 @@ Page({
         } else {
             this.setData({ addGoods: true })
         }
+        
     },
     closeaddGoods() {
         this.setData({
@@ -161,8 +163,17 @@ Page({
     },
 
     //goodsInfo组件事件
-    countChange(e){
+    async countChange(e){
+        const { data } = await $http.goodscountchange(e.detail)
+    },
+    async allOut(e){
         console.log(e.detail);
-        
+        const { data } = await $http.delgoods(e.detail)
+        if(data){
+            Notify({ type: 'success', message: "取出成功" });
+        }else {
+            Notify({ type: 'danger', message: "取出失败" });
+        }
+        this.getGoodsList()
     }
 })  
