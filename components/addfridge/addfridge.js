@@ -3,7 +3,16 @@ const app = getApp();
 const $http = app.globalData.http;
 Component({
   properties: {
-    loading: Boolean
+    loading: {
+      type:Boolean,
+      observer: function(newData, oldData){
+        console.log("newData",newData);
+        
+        this.setData({
+          loading:newData
+        })
+      }
+    }
   },
   data: {
     model: {
@@ -16,26 +25,17 @@ Component({
   methods: {
     //点击添加冰箱按钮
     async addfridge() {
-      this.setData({
-        loading: true
-      })
+      console.log(this.data.name);
       if (this.data.name) {
+        this.setData({
+          loading: true
+        })
+        
         this.setData({
           'model.owner': app.globalData.id,
           'model.name': this.data.name
         })
-        const res = await $http.addfridge(this.data.model)
-        if (res.data) {
-          //Notify({ type: 'success', message: "添加成功" });
-          this.setData({
-            loading: false
-          })
-          this.triggerEvent('addfridge', true)
-        } 
-        else 
-        {
-          //Notify({ type: 'success', message: "添加成功" });
-        }
+        this.triggerEvent('addfridge', this.data.model)
       } else {
         this.setData({
           error: true

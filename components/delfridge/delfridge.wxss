@@ -1,0 +1,10 @@
+/* components/delfridge/delfridge.wxss */
+.value-class {
+    flex: none !important;
+  }
+  .button{
+    margin-right: 40rpx;
+    margin-left: 40rpx;
+    margin-top: 40rpx;
+    margin-bottom: 140rpx;
+  }

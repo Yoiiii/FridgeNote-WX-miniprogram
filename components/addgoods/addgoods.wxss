@@ -1,14 +1,22 @@
 /* components/addgoods/addgoods.wxss */
 .input{
   width: 0 !important;
-}
-.upload{
-  margin-top: 20rpx;
+  margin-top: 10rpx !important;
 }
 .radio{
   display: flex !important;
   flex-direction: row !important;
+  justify-content: space-around !important;
 }
 .button{
   margin: 20rpx;
+}
+.radio-right{
+  margin-left: 30rpx;
+}
+.van-uploader__upload{
+  margin-top: 20rpx !important;
+}
+.van-uploader__preview{
+  margin-top: 20rpx !important;
 }

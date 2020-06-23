@@ -47,5 +47,7 @@
       display: block;
       text-align: center;
       margin: 10rpx;
+      margin-top: 30rpx;
      color: gray; 
+     font-size: small;
     }

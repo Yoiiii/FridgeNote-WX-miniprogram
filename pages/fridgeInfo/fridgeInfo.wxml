@@ -25,7 +25,7 @@
 		<view class="popup-title">
 			添加冰箱
 		</view>
-		<addfridge bindaddfridge="addFridge" />
+		<addfridge bindaddfridge="addFridge" loading="{{addFridgeLoading}}" />
 	</view>
 </van-popup>
 <van-popup show="{{fridgeChange}}" closeable position="bottom" custom-style="height: 50%" bind:close="closefridgeChange">
@@ -44,8 +44,6 @@
 		<addgoods bind:addGoods="addGoods" />
 	</view>
 </van-popup>
-<van-notify id="van-notify" />
-<van-dialog id="van-dialog" />
 <van-overlay show="{{ loading }}">
 	<view class="block">
 		<view class="wrapper">
@@ -53,3 +51,5 @@
 		</view>
 	</view>
 </van-overlay>
+<van-notify id="van-notify" />
+<van-dialog id="van-dialog" />

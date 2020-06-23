@@ -4,8 +4,8 @@
 		<view class="userName">{{userInfo.nickName}}</view>
 	</view>
 	<van-cell-group>
-		<van-cell title="新建冰箱" bind:click="addfridge"/>
-		<van-cell title="删除冰箱" bind:click="delfridge"/>
+		<van-cell title="新建冰箱" bind:click="openaddfridge"/>
+		<van-cell title="删除冰箱" bind:click="opendelfridge"/>
 	</van-cell-group>
 </view>
 <van-popup show="{{addFridge}}" closeable position="bottom" custom-style="height: 40%" bind:close="closeAddFridge">
@@ -13,10 +13,20 @@
 		<view class="popup-title">
 			添加冰箱
 		</view>
-		<addfridge bindaddfridge="addFridge" />
+		<addfridge bindaddfridge="addFridge" loading="{{addFridgeLoading}}"/>
+	</view>
+</van-popup>
+<van-popup show="{{delFridge}}" closeable position="bottom" custom-style="height: 50%" bind:close="closeDelFridge">
+	<view>
+		<view class="popup-title">
+			删除冰箱
+		</view>
+		<delfridge fridgeList="{{fridgeList}}" bind:delfridge="delFridge" loading="{{delFridgeLoading}}"/>
 	</view>
 </van-popup>
 <van-tabbar active="{{ active }}" safe-area-inset-bottom="true" bind:change="onChange">
 	<van-tabbar-item name="fridgeInfo" icon="orders-o">冰箱</van-tabbar-item>
 	<van-tabbar-item name="personal" icon="user-o">个人</van-tabbar-item>
 </van-tabbar>
+<van-notify id="van-notify" />
+<van-dialog id="van-dialog" />

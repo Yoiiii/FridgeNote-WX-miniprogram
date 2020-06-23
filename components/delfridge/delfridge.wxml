@@ -1,0 +1,22 @@
+<van-checkbox-group value="{{ result }}" bind:change="onChange">
+  <van-cell-group>
+    <van-cell
+      wx:for="{{ fridgeList }}"
+      wx:key="_id"
+      title="{{ item.name }}"
+      value-class="value-class"
+      clickable
+      data-index="{{index}}"
+      bind:click="toggle"
+    >
+      <van-checkbox
+        catch:tap="noop"
+        class="checkboxes-{{ index }}"
+        name="{{ item._id }}"
+      />
+    </van-cell>
+  </van-cell-group>
+</van-checkbox-group>
+<view class="button">
+	<van-button type="info" block round bind:click="delfridge"  loading="{{loading}}">删除冰箱</van-button>
+</view>

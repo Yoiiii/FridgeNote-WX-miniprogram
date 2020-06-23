@@ -5,32 +5,39 @@
 		placeholder="请输入物品名" 
 		error="{{!nameVerify}}"
 		bind:change="nameChange"
+		required
 	/>
-	<van-field input-class="input" label="相片">
-		<van-uploader 
-			class="upload" 
+	<van-field input-class="input" right-icon-class="upload" label="相片">
+		<van-uploader  
+			class="upload"
 			max-count="1" 
 			slot="button" 
 			file-list="{{ fileList }}" 
 			bind:after-read="afterRead" 
+			bind:delete="delete"
 		/>
 	</van-field>
 	<van-field input-class="input" label="类型">
-		<van-radio-group custom-class="radio" slot="button" value="{{ model.type }}" bind:change="typeChange">
-			<van-radio name="1">冷藏</van-radio>
-			<van-radio name="2">冷冻</van-radio>
+		<van-radio-group class="radio" slot="button" value="{{ model.type }}" bind:change="typeChange">
+			<van-radio name="1" >冷藏</van-radio>
+			<van-radio name="2" custom-class="radio-right">冷冻</van-radio>
 		</van-radio-group>
 	</van-field>
 	<van-field input-class="input" label="数量">
 		<van-stepper value="{{ 1 }}" slot="button" bind:change="countChange" />
 	</van-field>
-	<van-field value="{{ model.outDate }}" bind:focus="openOutDate" label="保质期">
+	<view bind:click="openOutDate">
+	<van-field  readonly value="{{ model.outDate }}" use-button-slot  label="保质期">
+	  <van-button slot="button" size="small" type="info" bind:click="openOutDate"
+      >选择日期</van-button
+    >
 	</van-field>
+	</view>
 </van-cell-group>
 <view class="button">
 	<van-button type="info"  block round bind:click="addGoods" loading="{{loading}}">添加物品</van-button>
 </view>
-<van-popup show="{{showOutDate}}" position="bottom" custom-style="height: 60%" bind:close="closeOutDate">
+<van-popup show="{{showOutDate}}" position="bottom" custom-style="height: 50%" bind:close="closeOutDate">
 	<van-datetime-picker 
 		type="date" 
 		value="{{ currentDate }}" 

@@ -88,23 +88,26 @@ const service = {
         if (!res.statusCode) {
             Notify({ type: 'danger', message: res.errMsg });
         }
+        else if(res.statusCode==422){
+            Notify({ type: 'danger', message: res.data.message });
+        }
         else if (res.statusCode != 200) {
             let code = res.statusCode.toString();
             if (code.substring(0, 1) == "4") {
                 Dialog.alert({
                     title: '错误',
-                    message: '请求出错: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
+                    message: '请求出错: ' + res.data.message + '\n ErrorCode:' + res.statusCode,
                 }).then(() => { });
 
             } else if (code.substring(0, 1) == "5") {
                 Dialog.alert({
                     title: '错误',
-                    message: '服务器异常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
+                    message: '服务器异常: ' + res.data.message + '\n ErrorCode:' + res.statusCode,
                 }).then(() => { });
             } else {
                 Dialog.alert({
                     title: '错误',
-                    message: '异常: ' + res.errMsg + '\n ErrorCode:' + res.statusCode,
+                    message: '异常: ' + res.data.message + '\n ErrorCode:' + res.statusCode,
                 }).then(() => { });
             }
         }
@@ -127,10 +130,10 @@ const test = () => {
     return service.get(`${config.baseUrl}/test`)
 }
 const getfridgelist = (data) => {
-    return service.post(`${config.baseUrl}/getfridgelist`, data)
+    return service.post(`${config.baseUrl}/getfridgelist2`, data)
 }
 const addfridge = (data) => {
-    return service.post(`${config.baseUrl}/addfridge`, data)
+    return service.post(`${config.baseUrl}/addfridge2`, data)
 }
 const addgoods = (data) => service.post(`${config.baseUrl}/addgoods`, data)
 
@@ -143,6 +146,8 @@ const upload = (data) => {
 const goodscountchange = (data)=> service.post(`${config.baseUrl}/goodscountchange`,data)
 
 const delgoods = data => service.post(`${config.baseUrl}/delgoods`,data)
+
+const delfridge = data => service.post(`${config.baseUrl}/delfridge`,data)
 module.exports = {
     //登錄(獲取openID)
     login,
@@ -153,5 +158,6 @@ module.exports = {
     upload,
     addgoods,
     goodscountchange,
-    delgoods
+    delgoods,
+    delfridge
 }

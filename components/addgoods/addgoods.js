@@ -6,6 +6,9 @@ Component({
   properties: {
 
   },
+  options: {
+    styleIsolation: 'shared',
+  },
   lifetimes: {
     attached: function () {
       // let date=new Date()
@@ -49,14 +52,19 @@ Component({
       const { file } = event.detail;
       // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
       const res = await $http.upload({ ...file })
-      console.log(res);
+      let jsonObj = JSON.parse(res.data);
       const { fileList = [] } = this.data;
-      fileList.push({ name: '图片', url: res.url, isImage: true, });
+      fileList.push({ name: '图片', url: jsonObj.url, isImage: true, });
       this.setData({
         fileList,
-        "model.image": res.url
+        "model.image": jsonObj.url
       });
       console.log("this.data.fileList", this.data.fileList);
+    },
+    delete(){
+      this.setData({
+        fileList:[]
+      });
     },
     nameChange(event) {
       this.setData({

@@ -9,7 +9,7 @@ Page({
         hasFridge: false,
         addFridge: false,
         fridgeChange: false,
-        addFridgeloading: false,
+        addFridgeLoading: false,
         addGoods: false,
         loading: true,
         fridgeList: [],
@@ -23,35 +23,26 @@ Page({
     },
     onLoad: async function (options) {
         if (app.globalData.id) {
-            await this.getfridgelist()
-            if (this.data.hasFridge) {
-                this.setData({
-                    "fridge.id": this.data.fridgeList[0]._id,
-                    "fridge.name": this.data.fridgeList[0].name
-                })
-                app.globalData.fridgeId=this.data.fridgeList[0]._id
-                this.getGoodsList()
-            }
+            this.loading()
         } else {
             app.userIdReadyCallback = async res => {
-                await this.getfridgelist()
-                if (this.data.hasFridge) {
-                    this.setData({
-                        "fridge.id": this.data.fridgeList[0]._id,
-                        "fridge.name": this.data.fridgeList[0].name
-                    })
-                    app.globalData.fridgeId=this.data.fridgeList[0]._id
-                    this.getGoodsList()
-                }
+                this.loading()
             }
         }
     },
-    onShow: function () {
+    onShow: async function () {
         if (typeof this.getTabBar === 'function' &&
             this.getTabBar()) {
             this.getTabBar().setData({
                 active: this.data.active
             })
+        }
+        if (app.globalData.id) {
+            this.loading()
+        } else {
+            app.userIdReadyCallback = async res => {
+                this.loading()
+            }
         }
     },
     onPullDownRefresh: function () {
@@ -62,6 +53,17 @@ Page({
     },
     onShareAppMessage: function () {
 
+    },
+    async loading(){
+        await this.getfridgelist()
+        if (this.data.hasFridge) {
+            this.setData({
+                "fridge.id": this.data.fridgeList[0]._id,
+                "fridge.name": this.data.fridgeList[0].name
+            })
+            app.globalData.fridgeId=this.data.fridgeList[0]._id
+            this.getGoodsList()
+        }
     },
     overLoading() {
         this.setData({ loading: false })
@@ -77,7 +79,10 @@ Page({
             });
             this.overLoading()
         } else {
-            this.setData({ hasFridge: false });
+            this.setData({ 
+                hasFridge: false,
+                "fridge.name":"我的冰箱"
+             });
             this.overLoading()
         }
     },
@@ -111,15 +116,20 @@ Page({
     closeAddFridge() {
         this.setData({ addFridge: false });
     },
-    addFridge(e) {
-        if (e.detail) {
-            Notify({ type: 'success', message: "添加成功" });
-            this.setData({
-                addFridge: false,
-            })
-            this.getfridgelist()
-        } else {
-            Notify({ type: 'danger', message: "添加失败" });
+    async addFridge(e) {
+        const res = await $http.addfridge(e.detail)
+        if (res.data) {
+          Notify({ type: 'success', message: "添加成功" });
+          this.setData({
+            addFridgeLoading: false,
+            addFridge:false
+          })
+          this.loading()
+        } 
+        else {
+          this.setData({
+            addFridgeLoading: false
+          })
         }
     },
     openfridgeChange() {
@@ -143,7 +153,6 @@ Page({
         } else {
             this.setData({ addGoods: true })
         }
-        
     },
     closeaddGoods() {
         this.setData({

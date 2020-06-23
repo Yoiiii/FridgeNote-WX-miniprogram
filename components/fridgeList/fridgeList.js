@@ -7,10 +7,11 @@ Component({
     List: {
       type: Array,
       value: [],
-      // observer: function(newData, oldData){
-      //   console.log("111",newData);
-        
-      // }
+      observer: function(newData, oldData){
+        this.setData({
+          List:newData
+        })
+      }
     },
   },
   lifetimes: {

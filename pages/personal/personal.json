@@ -1,5 +1,6 @@
 {
   "usingComponents": {
-    "addfridge":"/components/addfridge/addfridge"
+    "addfridge":"/components/addfridge/addfridge",
+    "delfridge":"/components/delfridge/delfridge"
   }
 }
